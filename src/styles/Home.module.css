@@ -9,23 +9,42 @@
   padding: 24px 20px;
 }
 
-.nav {
+.nav a {
   color: #8257E5;
 }
 
 .content {
-  color: #555;
-
   max-width: 776px;
   width: 100%;
   margin: 0 auto;
   padding: 24px 20px;
 }
 
-.content h2 {
+.content h1 {
   margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.content h2 {
+  font-size: 18px;
 }
 
 .content p {
   margin: 20px 0;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  max-width: 1064px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+
+.footer a {
+  padding: 1rem 2rem;
+  color: #996DFF;
 }
