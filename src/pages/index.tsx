@@ -1,25 +1,12 @@
 import Head from "next/head"
 import Image from "next/image"
-import { useEffect, useRef, useState } from "react"
+import * as Dialog from '@radix-ui/react-dialog'
 
 import LogoSvg from '../assets/logo.svg'
 
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const modalRef = useRef(null)
-
-  function handleModalOpen() {
-    setIsModalOpen(true)
-  }
-
-  useEffect(() => {
-    if(isModalOpen) {
-      modalRef?.current.focus()
-    }
-  }, [isModalOpen])
-
   return (
     <>
       <Head>
@@ -51,19 +38,29 @@ export default function Home() {
       <footer className={styles.footer} >
         <Image src={LogoSvg} width={286/2} alt="Blog da Rocketseat" />
         <nav className={styles.nav} aria-label="Rodapé">
-          <button onClick={handleModalOpen} aria-controls="modal" >
-          Termos de uso
-          </button>
+          <Dialog.Root>
+            <Dialog.Trigger asChild>
+              <button>Termos de uso</button>
+            </Dialog.Trigger>
+            <Dialog.Portal>
+              <Dialog.Overlay className={styles.overlay} />
+              <Dialog.Content className={styles.modal}>
+                <Dialog.Title>
+                  Termos de uso
+                </Dialog.Title>
+                <Dialog.Description>
+                  Esses são os termos de uso
+                </Dialog.Description>
+                <Dialog.Close asChild>
+                  <button className={styles.closeModalButton}>
+                    Fechar
+                  </button>
+                </Dialog.Close>
+              </Dialog.Content>
+            </Dialog.Portal>
+          </Dialog.Root>
         </nav>
       </footer>
-
-      {isModalOpen && 
-        <div id="modal" ref={modalRef} className={styles.modal} role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription" tabIndex={-1}>
-          <h2 id="modalTitle">Termos de uso</h2>
-          <p id="modalDescription">Esses são os termos de uso</p>
-        </div>
-      }
-      
     </>
   )
 }
